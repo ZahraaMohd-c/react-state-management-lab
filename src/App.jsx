@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './App.css'
 
 const App = () => {
 
@@ -86,8 +87,8 @@ const App = () => {
     img: 'https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png',
   },
 ])
-let totalStrength =0
-let totalAgility=0
+let totalStrength 
+let totalAgility
 
 
 function handleAddFighter(fighter){
@@ -105,18 +106,23 @@ function handleAddFighter(fighter){
 
 }
 
- team.forEach(fighter => {
-  totalStrength+=fighter.strength
-  totalAgility+=fighter.agility
- })
+ function handleremoveFighter(fighter){
+  const newTeam = team.filter( member => { return fighter.id !== member.id})
+  setTeam(newTeam)
+  const newZombiefighters = [...zombieFighters,fighter]
+  setZombieFighters(newZombiefighters)
+  setMoney(money+fighter.price)
+
+
+ }
 
 
   return (
     <>
     <h1>Zombie Fighters</h1>
     <h3>Money: {money}</h3>
-    <h3>Team Strength: {totalStrength}</h3>
-    <h3>Team Agility: {totalAgility}</h3>
+    <h3>Team Strength: {totalStrength = team.reduce((acc, current) => acc+current.strength,0)}</h3>
+    <h3>Team Agility: {totalAgility = team.reduce((acc,current)=> acc+current.agility,0)}</h3>
     <h2>Team</h2>
     <ul>
 
@@ -128,7 +134,7 @@ function handleAddFighter(fighter){
         <p>price: {fighter.price}</p>
         <p>strength: {fighter.strength}</p>
         <p>Agility: {fighter.agility}</p>
-        <button >Remove</button>
+        <button onClick={()=> handleremoveFighter(fighter)}>Remove</button>
 
       </li>
       )} )
